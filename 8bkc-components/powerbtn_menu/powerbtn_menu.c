@@ -86,12 +86,12 @@ int powerbtn_menu_show(uint16_t *fb) {
 		//Filter out only newly pressed buttons
 		io=(oldIo^newIo)&newIo;
 		oldIo=newIo;
-		if (io&KC_BTN_UP && !scroll) {
+		if (io&KC_BTN_DOWN && !scroll) {
 			menuItem++;
 			if (menuItem>=SCN_COUNT) menuItem=0;
 			scroll=-SCROLLSPD;
 		}
-		if (io&KC_BTN_DOWN && !scroll) {
+		if (io&KC_BTN_UP && !scroll) {
 			menuItem--;
 			if (menuItem<0) menuItem=SCN_COUNT-1;
 			scroll=SCROLLSPD;
