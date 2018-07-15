@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "8bkc-hal.h"
+#include "ugui.h"
+#include "8bkcgui-widgets.h"
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -172,6 +174,8 @@ int powerbtn_menu_show(uint16_t *fb) {
 			renderGfx(fb, 14, 25+16, 14, 130, (v*60)/256, 4);
 		}
 		
+		kcugui_drawBatteryIcon();
+
 		if (doRefresh) {
 			kchal_send_fb(fb);
 		}

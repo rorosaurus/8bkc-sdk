@@ -137,6 +137,13 @@ typedef int (*kcugui_menu_cb_t)(int button, char **desc, kcugui_menuitem_t **men
  */
 int kcugui_menu(kcugui_menuitem_t *menu, char *desc, kcugui_menu_cb_t cb, void *usrptr);
 
+/**
+ * @brief Draws battery state-of-charge icon
+ * 
+ * Shows a small battery icon in the top-right, indicate the current battery remaining.
+ */
+void kcugui_drawBatteryIcon();
+
 #ifdef __cplusplus
 }
 #endif

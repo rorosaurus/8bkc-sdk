@@ -268,3 +268,21 @@ int kcugui_menu(kcugui_menuitem_t *menu, char *desc, kcugui_menu_cb_t cb, void *
 		} while (prKeys==0);
 	}
 }
+
+void kcugui_drawBatteryIcon() {
+	// draw outer battery frame and fill it with black
+	UG_DrawFrame(KC_SCREEN_W-17, 0, KC_SCREEN_W-3, 6, C_WHITE);
+	UG_FillFrame(KC_SCREEN_W-16, 1, KC_SCREEN_W-4, 5, C_BLACK);
+	// draw the positive contact
+	UG_DrawFrame(KC_SCREEN_W-2, 2, KC_SCREEN_W-1, 4, C_WHITE);
+
+	// collect battery info and select appropriate filler color
+	int b = kchal_get_bat_pct();
+	UG_COLOR batColor;
+	if (b < 20) batColor = C_RED;
+	else if (b < 50) batColor = C_GOLD;
+	else batColor = C_LIME;
+
+	// fill in battery, relative to battery SOC
+	UG_FillFrame(KC_SCREEN_W-16, 1, KC_SCREEN_W-4-(((100-b)*12)/100), 5, batColor);
+}
