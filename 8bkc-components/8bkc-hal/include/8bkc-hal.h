@@ -239,6 +239,7 @@ void kchal_boot_into_new_app();
  * @return Current battery voltage
  */
 int kchal_get_bat_mv();
+int kchal_get_stable_bat_mv();
 
 /**
  * @brief Get the estimated battery full-ness, in percent
@@ -246,6 +247,8 @@ int kchal_get_bat_mv();
  * @return Battery full-ness, 0-100. 0 is empty, 100 is entirely full.
  */
 int kchal_get_bat_pct();
+
+int kchal_get_new_bat_pct();
 
 /**
  * @brief Re-calibrate the ADC when the battery is fully charged

@@ -154,6 +154,24 @@ int kchal_get_bat_mv() {
 	return (v*BAT_FULL_MV)/battFullAdcVal;
 }
 
+int kchal_get_stable_bat_mv() {
+	int v=ioGetVbatAdcVal();
+	if (battFullAdcVal==0) return 0;
+	return (v*BAT_FULL_MV)/battFullAdcVal;
+}
+
+int kchal_get_new_bat_pct() {
+	float v = (float)kchal_get_stable_bat_mv() / (float)1000;
+	int pct = 100;
+	// piecewise curve-fitting for better battery estimation
+	// More details: https://github.com/PocketSprite/8bkc-sdk/issues/15
+	if (v >= 4.2) pct = 100;
+	else if (v >= 3.66) pct = -11940.85 + 7812.571*v - 1676.957*(v*v) + 118.9048*(v*v*v);
+	else if (v > 3.2) pct = 1.621552 + 0.00000000000000007644802*(pow(2.71828,(10.92907*v)));
+	else pct = 0;
+	return pct;
+}
+
 int kchal_get_bat_pct() {
 	float v = (float)kchal_get_bat_mv() / (float)1000;
 	int pct = 100;
